@@ -116,6 +116,21 @@ $(document).ready(function() {
 	$('#massSendbutton10').on('click', function() {
         MassMessages("Debug", $('#myMessage').val(), 10)   
 	});
+
+    // Automated testing button pressed.
+	$('#massSendbutton100').on('click', function() {
+        MassMessages("Debug", $('#myMessage').val(), 100)   
+	});
+
+    // Automated testing button pressed.
+	$('#massSendbutton1000').on('click', function() {
+        MassMessages("Debug", $('#myMessage').val(), 1000)   
+	});
+
+    // Automated testing button pressed.
+	$('#massSendbutton10000').on('click', function() {
+        MassMessages("Debug", $('#myMessage').val(), 10000)   
+	});
 	
     // No level button pressed.
 	$('#NoLevel').on('click', function() {
