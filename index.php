@@ -43,24 +43,7 @@ function BuildMessage(level, message){
     return toSend;
 }
 
-/*
-FUNCTION :MassMessages
-DESCRIPTION : This function sends a mass message request
-PARAMETERS : amount, message, level
-RETURNS : none
-*/
-function MassMessages(level, message, amount){
 
-    // Get token from enviroment variables.
-    var token = "<?php echo $client_guid ?>";
-
-    // Build JSON.
-    var toSend = { Level: level, AuthGuid: token, Message: message };
-
-    for (var y = 0; y < amount; y++){
-        socket.send(JSON.stringify(toSend));
-    }
-}
 
 $(document).ready(function() {
 
@@ -73,6 +56,25 @@ $(document).ready(function() {
     // Connect web socket.
 	socket.on('connect', function() {
 	});
+
+        /*
+        FUNCTION :MassMessages
+        DESCRIPTION : This function sends a mass message request
+        PARAMETERS : amount, message, level
+        RETURNS : none
+        */
+        function MassMessages(level, message, amount){
+
+        // Get token from enviroment variables.
+        var token = "<?php echo $client_guid ?>";
+
+        // Build JSON.
+        var toSend = { Level: level, AuthGuid: token, Message: message };
+
+        for (var y = 0; y < amount; y++){
+            socket.send(JSON.stringify(toSend));
+        }
+    }
 
     // Message has been received.
 	socket.on('message', function(msg) {
