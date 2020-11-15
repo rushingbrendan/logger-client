@@ -167,6 +167,9 @@ $(document).ready(function() {
 </script>
 
 <div class="container">
+    <h1>Logging Service Client Testing Interface</h1>
+    <br />
+    <br />
     <div class="form-group">
         <label>Log Message</label>
         <input type="text" id="myMessage" class="form-control" value="Test Message">
