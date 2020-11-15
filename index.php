@@ -23,7 +23,7 @@ function BuildMessage(level, message){
 }
 $(document).ready(function() {
 
-	var socket = io.connect("878100a5-3228-4fbe-b91e-1e61a888f4e0");
+	var socket = io.connect(<?php echo "$server_url" ?>);
 
 	socket.on('connect', function() {
 	});
