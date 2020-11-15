@@ -15,6 +15,12 @@ $server_url = getenv('SERVER_URL');
 </head>
 <body>
 <script type="text/javascript">
+
+function BuildMessage(level, message){
+    var toSend = { Level: level, AuthGuid: "878100a5-3228-4fbe-b91e-1e61a888f4e0", Message: message };
+
+    return toSend;
+}
 $(document).ready(function() {
 
 	var socket = io.connect('wss://mysterious-woodland-76957.herokuapp.com');
@@ -27,7 +33,8 @@ $(document).ready(function() {
 	});
 
 	$('#debugSendbutton').on('click', function() {
-		var toSend = { Level: "Debug", AuthGuid: "878100a5-3228-4fbe-b91e-1e61a888f4e0", Message: $('#myMessage').val() };
+		//var toSend = { Level: "Debug", AuthGuid: "878100a5-3228-4fbe-b91e-1e61a888f4e0", Message: $('#myMessage').val() };
+        var toSend = BuildMessage("Debug", $('#myMessage').val() )
 		socket.send(JSON.stringify(toSend));
 	});
 	
