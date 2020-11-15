@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     // Message has been received.
 	socket.on('message', function(msg) {
-		$("#messages").append('<li class="list-group-item">Received message: '+msg+'</li>');
+		$("#messages").append('<li class="list-group-item">'+Date.now() + ' - ' +'Received message: '+msg+'</li>');
 	});
 
     // Debug button pressed.
