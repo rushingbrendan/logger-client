@@ -132,20 +132,28 @@ $(document).ready(function() {
 });
 </script>
 
-<input type="text" id="myMessage">
-<button id="criticalSendbutton" class="btn btn-danger">Critical</button>
-<button id="errorSendbutton" class="btn btn-primary">Error</button>
-<button id="warningSendbutton" class="btn btn-warning">Warning</button>
-<button id="infoSendbutton" class="btn btn-info">Info</button>
-<button id="debugSendbutton" class="btn btn-light">Debug</button>
+<div class="form-group">
+    <label>Log Message</label>
+    <input type="text" id="myMessage" class="form-control" value="Test Message">
+    <button id="criticalSendbutton" class="btn btn-danger">Critical</button>
+    <button id="errorSendbutton" class="btn btn-primary">Error</button>
+    <button id="warningSendbutton" class="btn btn-warning">Warning</button>
+    <button id="infoSendbutton" class="btn btn-info">Info</button>
+    <button id="debugSendbutton" class="btn btn-light">Debug</button>
+    <br />
 
-<button id="InvalidGuidSend" class="btn btn-secondary">Invalid Guid</button>
-<button id="NoLevel" class="btn btn-secondary">No Level</button>
-<button id="NoAuth" class="btn btn-secondary">No Auth</button>
-<button id="NoMessage" class="btn btn-secondary">No Message</button>
+    <button id="InvalidGuidSend" class="btn btn-secondary">Invalid Guid</button>
+    <button id="NoLevel" class="btn btn-secondary">No Level</button>
+    <button id="NoAuth" class="btn btn-secondary">No Auth</button>
+    <button id="NoMessage" class="btn btn-secondary">No Message</button>
+    <br />
+
+    <button id="massSendbutton" class="btn btn-primary">Mass AutoTesting</button>
+</div>
 
 
-<button id="massSendbutton" class="btn btn-primary">Mass AutoTesting</button>
+
+
 <ul id="messages" class="list-group"></ul>
 </body>
 </html>
