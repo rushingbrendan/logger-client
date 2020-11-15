@@ -78,7 +78,8 @@ $(document).ready(function() {
 
     // Message has been received.
 	socket.on('message', function(msg) {
-		$("#messages").append('<li class="list-group-item">'+Date.now() + ' - ' +'Received message: '+msg+'</li>');
+        var currentTime = Date.now();        
+		$("#messages").append('<li class="list-group-item">'+ currentTime.toString() + ' - ' +'Received message: '+msg+'</li>');
 	});
 
     // Debug button pressed.
