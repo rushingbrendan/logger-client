@@ -17,13 +17,13 @@ $server_url = getenv('SERVER_URL');
 <script type="text/javascript">
 
 function BuildMessage(level, message){
-    var toSend = { Level: level, AuthGuid: <?php echo $client_guid ?>, Message: message };
+    var toSend = { Level: level, AuthGuid: <?php echo "$client_guid" ?>, Message: message };
 
     return toSend;
 }
 $(document).ready(function() {
 
-	var socket = io.connect(<?php echo $server_url ?>);
+	var socket = io.connect(<?php echo "$server_url" ?>);
 
 	socket.on('connect', function() {
 	});
