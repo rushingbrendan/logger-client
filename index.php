@@ -22,6 +22,7 @@ $server_url = getenv('SERVER_URL');
 <title>Logger Client Test Application</title>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
 <script type="text/javascript">
@@ -56,7 +57,7 @@ $(document).ready(function() {
 
     // Message has been received.
 	socket.on('message', function(msg) {
-		$("#messages").append('<li>Received message: '+msg+'</li>');
+		$("#messages").append('<li class="list-group-item">Received message: '+msg+'</li>');
 	});
 
     // Debug button pressed.
@@ -130,19 +131,21 @@ $(document).ready(function() {
 
 });
 </script>
-<ul id="messages"></ul>
+
 <input type="text" id="myMessage">
-<button id="criticalSendbutton">Critical</button>
-<button id="errorSendbutton">Error</button>
-<button id="warningSendbutton">Warning</button>
-<button id="infoSendbutton">Info</button>
-<button id="debugSendbutton">Debug</button>
-<button id="InvalidGuidSend">Invalid Guid</button>
-<button id="NoLevel">No Level</button>
-<button id="NoAuth">No Auth</button>
-<button id="NoMessage">No Message</button>
+<button id="criticalSendbutton" class="btn btn-danger">Critical</button>
+<button id="errorSendbutton" class="btn btn-primary">Error</button>
+<button id="warningSendbutton" class="btn btn-warning">Warning</button>
+<button id="infoSendbutton" class="btn btn-info">Info</button>
+<button id="debugSendbutton" class="btn btn-light">Debug</button>
+
+<button id="InvalidGuidSend" class="btn btn-secondary">Invalid Guid</button>
+<button id="NoLevel" class="btn btn-secondary">No Level</button>
+<button id="NoAuth" class="btn btn-secondary">No Auth</button>
+<button id="NoMessage" class="btn btn-secondary">No Message</button>
 
 
-<button id="massSendbutton">Mass AutoTesting</button>
+<button id="massSendbutton" class="btn btn-primary">Mass AutoTesting</button>
+<ul id="messages" class="list-group"></ul>
 </body>
 </html>
