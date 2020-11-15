@@ -9,7 +9,7 @@ $server_url = getenv('SERVER_URL');
 
 <html>
 <head>
-<title>Chat Room</title>
+<title>Logger Client Test Application</title>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
@@ -17,13 +17,13 @@ $server_url = getenv('SERVER_URL');
 <script type="text/javascript">
 
 function BuildMessage(level, message){
-    var toSend = { Level: level, AuthGuid: "878100a5-3228-4fbe-b91e-1e61a888f4e0", Message: message };
+    var toSend = { Level: level, AuthGuid: <?php $client_guid ?>, Message: message };
 
     return toSend;
 }
 $(document).ready(function() {
 
-	var socket = io.connect('wss://mysterious-woodland-76957.herokuapp.com');
+	var socket = io.connect(<?php $server_url ?>);
 
 	socket.on('connect', function() {
 	});
@@ -32,8 +32,7 @@ $(document).ready(function() {
 		$("#messages").append('<li>Received message: '+msg+'</li>');
 	});
 
-	$('#debugSendbutton').on('click', function() {
-		//var toSend = { Level: "Debug", AuthGuid: "878100a5-3228-4fbe-b91e-1e61a888f4e0", Message: $('#myMessage').val() };
+	$('#debugSendbutton').on('click', function() {		
         var toSend = BuildMessage("Debug", $('#myMessage').val() )
 		socket.send(JSON.stringify(toSend));
 	});
