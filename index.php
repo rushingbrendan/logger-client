@@ -18,6 +18,7 @@ $server_url = getenv('SERVER_URL');
 
 function BuildMessage(level, message){
     var token = <?php echo "$client_guid" ?>;
+    console.log(token);
 
     var toSend = { Level: level, AuthGuid: token, Message: message };
 
