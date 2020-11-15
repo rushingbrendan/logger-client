@@ -43,6 +43,25 @@ function BuildMessage(level, message){
     return toSend;
 }
 
+/*
+FUNCTION :MassMessages
+DESCRIPTION : This function sends a mass message request
+PARAMETERS : amount, message, level
+RETURNS : none
+*/
+function MassMessages(level, message, amount){
+
+    // Get token from enviroment variables.
+    var token = "<?php echo $client_guid ?>";
+
+    // Build JSON.
+    var toSend = { Level: level, AuthGuid: token, Message: message };
+
+    for (var y = 0; y < amount; y++){
+        socket.send(JSON.stringify(toSend));
+    }
+}
+
 $(document).ready(function() {
 
     // Get server URL from enviroment variables.
@@ -91,11 +110,8 @@ $(document).ready(function() {
 	});
 
     // Automated testing button pressed.
-	$('#massSendbutton').on('click', function() {
-        for (var y = 0; y < 200; y++){
-            var toSend = BuildMessage("Critical", $('#myMessage').val())        
-		    socket.send(JSON.stringify(toSend));
-        }        
+	$('#massSendbutton10').on('click', function() {
+        MassMessages("Debug", $('#myMessage').val(), 10)   
 	});
 	
     // No level button pressed.
@@ -132,28 +148,38 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="form-group">
-    <label>Log Message</label>
-    <input type="text" id="myMessage" class="form-control" value="Test Message">
-    <button id="criticalSendbutton" class="btn btn-danger">Critical</button>
-    <button id="errorSendbutton" class="btn btn-primary">Error</button>
-    <button id="warningSendbutton" class="btn btn-warning">Warning</button>
-    <button id="infoSendbutton" class="btn btn-info">Info</button>
-    <button id="debugSendbutton" class="btn btn-light">Debug</button>
-    <br />
+<div class="container">
+    <div class="form-group">
+        <label>Log Message</label>
+        <input type="text" id="myMessage" class="form-control" value="Test Message">
+        <button id="criticalSendbutton" class="btn btn-danger">Critical</button>
+        <button id="errorSendbutton" class="btn btn-primary">Error</button>
+        <button id="warningSendbutton" class="btn btn-warning">Warning</button>
+        <button id="infoSendbutton" class="btn btn-info">Info</button>
+        <button id="debugSendbutton" class="btn btn-light">Debug</button>
+        <br />
+        <br />
+        <br />
 
-    <button id="InvalidGuidSend" class="btn btn-secondary">Invalid Guid</button>
-    <button id="NoLevel" class="btn btn-secondary">No Level</button>
-    <button id="NoAuth" class="btn btn-secondary">No Auth</button>
-    <button id="NoMessage" class="btn btn-secondary">No Message</button>
-    <br />
+        <label>Invalid Log Messages</label>
+        <button id="InvalidGuidSend" class="btn btn-secondary">Invalid Guid</button>
+        <button id="NoLevel" class="btn btn-secondary">No Level</button>
+        <button id="NoAuth" class="btn btn-secondary">No Auth</button>
+        <button id="NoMessage" class="btn btn-secondary">No Message</button>
+        <br />
+        <br />
+        <br />
 
-    <button id="massSendbutton" class="btn btn-primary">Mass AutoTesting</button>
+        <label>Automated Testing</label>
+        <button id="massSendbutton10" class="btn btn-primary">10 Messages</button>
+        <button id="massSendbutton100" class="btn btn-primary">100 Messages</button>
+        <button id="massSendbutton1000" class="btn btn-primary">1000 Messages</button>
+        <button id="massSendbutton10000" class="btn btn-primary">10000 Messages</button>
+    </div>
+
+    <label>Event Log</label>
+    <ul id="messages" class="list-group"></ul>
 </div>
 
-
-
-
-<ul id="messages" class="list-group"></ul>
 </body>
 </html>
