@@ -17,7 +17,7 @@ $server_url = getenv('SERVER_URL');
 <script type="text/javascript">
 
 function BuildMessage(level, message){
-    var token = <?php echo "$client_guid" ?>;
+    var token = "<?php echo $client_guid ?>";
     console.log(token);
 
     var toSend = { Level: level, AuthGuid: token, Message: message };
@@ -25,7 +25,7 @@ function BuildMessage(level, message){
     return toSend;
 }
 $(document).ready(function() {
-    var server = <?php echo "$server_url" ?>;
+    var server = "<?php echo $server_url ?>";
 
 	var socket = io.connect(server);
 
