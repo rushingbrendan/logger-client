@@ -23,7 +23,7 @@ function BuildMessage(level, message){
 }
 $(document).ready(function() {
 
-	var socket = io.connect(<?php echo "$server_url" ?>);
+	var socket = io.connect("878100a5-3228-4fbe-b91e-1e61a888f4e0");
 
 	socket.on('connect', function() {
 	});
@@ -130,5 +130,7 @@ $(document).ready(function() {
 <button id="NoMessage">No Message</button>
 <!--https://mysterious-woodland-76957.herokuapp.com-->
 <!--https://localhost:5000-->
+<h1>Server: <?php echo "$server_url" ?> </h1>
+<h1>Guid: <?php echo "$client_guid" ?> </h1>
 </body>
 </html>
