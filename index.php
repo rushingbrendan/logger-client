@@ -75,22 +75,24 @@ $(document).ready(function() {
             var time = new Date().getUTCTime();
 
             // Build JSON.
-            var message = { 
-                ApplicationId: $('#applicationId').val(),
-                Time: "2020-11-14_20:10:28:123456",
-                TransactionId: $('#transactionId').val(),
-                UserId: $('#userId').val(),
-                Class: $('#class').val(),
-                Method: $('#method').val(),
-                Description: $('#description').val()            
-            }
+            // var message = { 
+            //     ApplicationId: $('#applicationId').val(),
+            //     Time: "2020-11-14_20:10:28:123456",
+            //     TransactionId: $('#transactionId').val(),
+            //     UserId: $('#userId').val(),
+            //     Class: $('#class').val(),
+            //     Method: $('#method').val(),
+            //     Description: $('#description').val()            
+            // }
 
+            var message = "ApplicationId="+$('#applicationId').val() + "," + "Time=2020-11-14_20:10:28:123456"+',' + "TransactionId="+$('#transactionId').val() +"," + "UserId="+$('#userId').val()+","+"Class="+$('#class').val() +',' + "Method="+$('#method').val()+',' + "Description="+$('#description').val();          
+            
             var toSend = { 
                 Level: level, 
                 AuthGuid: token, 
                 Message: message };
 
-            console.log(JSON.parse(JSON.stringify(toSend)));
+            console.log(toSend);
             return toSend;
         }
 
