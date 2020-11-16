@@ -27,21 +27,7 @@ $server_url = getenv('SERVER_URL');
 <body>
 <script type="text/javascript">
 
-/*
-FUNCTION :BuildMessage
-DESCRIPTION : This function builds the logging message to be sent to server.
-PARAMETERS : level, message
-RETURNS : message
-*/
-function BuildMessage(level, message){
 
-    // Get token from enviroment variables.
-    var token = "<?php echo $client_guid ?>";
-    
-    // Build JSON.
-    var toSend = { Level: level, AuthGuid: token, Message: message };
-    return toSend;
-}
 
 
 
@@ -65,16 +51,41 @@ $(document).ready(function() {
         */
         function MassMessages(level, message, amount){
 
-        // Get token from enviroment variables.
-        var token = "<?php echo $client_guid ?>";
-
-        // Build JSON.
-        var toSend = { Level: level, AuthGuid: token, Message: message };
-
-        for (var y = 0; y < amount; y++){
-            socket.send(JSON.stringify(toSend));
+            for (var y = 0; y < amount; y++){
+                var toSend = BuildMessage(level);
+                socket.send(JSON.stringify(toSend));
+            }
         }
-    }
+
+        /*
+        FUNCTION :BuildMessage
+        DESCRIPTION : This function builds the logging message to be sent to server.
+        PARAMETERS : level
+        RETURNS : message
+        */
+        function BuildMessage(level){
+
+            // Get token from enviroment variables.
+            var token = "<?php echo $client_guid ?>";
+            var time = Date().toISOString();
+
+            // Build JSON.
+            var message = { 
+                ApplicationId: $('#applicationId'),
+                Time: time,
+                TransactionId: $('#transactionId'),
+                UserId: $('#userId'),
+                Class: $('#class'),
+                Method: $('#method'),
+                Description: $('#description')            
+            }
+
+            var toSend = { 
+                Level: level, 
+                AuthGuid: token, 
+                Message: message };
+            return toSend;
+        }
 
     // Message has been received.
 	socket.on('message', function(msg) {
@@ -84,53 +95,44 @@ $(document).ready(function() {
 
     // Debug button pressed.
 	$('#debugSendbutton').on('click', function() {		
-        var toSend = BuildMessage("Debug", $('#myMessage').val())
+        var toSend = BuildMessage("Debug");
 		socket.send(JSON.stringify(toSend));
 	});
 	
     // Critical button pressed.
 	$('#criticalSendbutton').on('click', function() {
-        var toSend = BuildMessage("Critical", $('#myMessage').val())
+        var toSend = BuildMessage("Critical");
 		socket.send(JSON.stringify(toSend));
 	});
 	
     // Error button pressed.
 	$('#errorSendbutton').on('click', function() {
-        var toSend = BuildMessage("Error", $('#myMessage').val())
+        var toSend = BuildMessage("Error");
 		socket.send(JSON.stringify(toSend));
 	});
 
     // Warning button pressed.
 	$('#warningSendbutton').on('click', function() {
-        var toSend = BuildMessage("Warning", $('#myMessage').val())
+        var toSend = BuildMessage("Warning");
 		socket.send(JSON.stringify(toSend));
 	});
 
     // Info button pressed.
 	$('#infoSendbutton').on('click', function() {
-        var toSend = BuildMessage("Info", $('#myMessage').val())
+        var toSend = BuildMessage("Info");
 		socket.send(JSON.stringify(toSend));
 	});
 
     // Automated testing button pressed.
 	$('#massSendbutton10').on('click', function() {
-        MassMessages("Debug", $('#myMessage').val(), 10)   
+        MassMessages("Debug", 10)   
 	});
 
     // Automated testing button pressed.
 	$('#massSendbutton100').on('click', function() {
-        MassMessages("Debug", $('#myMessage').val(), 100)   
+        MassMessages("Debug", 100)   
 	});
 
-    // Automated testing button pressed.
-	$('#massSendbutton1000').on('click', function() {
-        MassMessages("Debug", $('#myMessage').val(), 1000)   
-	});
-
-    // Automated testing button pressed.
-	$('#massSendbutton10000').on('click', function() {
-        MassMessages("Debug", $('#myMessage').val(), 10000)   
-	});
 	
     // No level button pressed.
 	$('#NoLevel').on('click', function() {
@@ -171,8 +173,24 @@ $(document).ready(function() {
     <br />
     <br />
     <div class="form-group">
-        <label>Log Message</label>
-        <input type="text" id="myMessage" class="form-control" value="Test Message">
+        <label>Application Id</label>
+        <input type="text" id="applicationId" class="form-control" value="123456">
+
+        <label>Transaction Id</label>
+        <input type="text" id="transactionId" class="form-control" value="abcdef">
+
+        <label>User Id</label>
+        <input type="text" id="userId" class="form-control" value="123456">
+
+        <label>Class</label>
+        <input type="text" id="class" class="form-control" value="ClassName">
+
+        <label>Method</label>
+        <input type="text" id="method" class="form-control" value="MethodName">
+
+        <label>Description</label>
+        <input type="text" id="description" class="form-control" value="Message To Log">
+        
         <button id="criticalSendbutton" class="btn btn-danger">Critical</button>
         <button id="errorSendbutton" class="btn btn-primary">Error</button>
         <button id="warningSendbutton" class="btn btn-warning">Warning</button>
@@ -194,8 +212,6 @@ $(document).ready(function() {
         <label>Automated Testing</label>
         <button id="massSendbutton10" class="btn btn-primary">10 Messages</button>
         <button id="massSendbutton100" class="btn btn-primary">100 Messages</button>
-        <button id="massSendbutton1000" class="btn btn-primary">1000 Messages</button>
-        <button id="massSendbutton10000" class="btn btn-primary">10000 Messages</button>
     </div>
 
     <label>Event Log</label>
