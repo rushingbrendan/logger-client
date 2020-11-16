@@ -33,6 +33,11 @@ $server_url = getenv('SERVER_URL');
 
 $(document).ready(function() {
 
+    // Date extension.
+    Date.prototype.getUTCTime = function(){ 
+    return this.getTime()-(this.getTimezoneOffset()*60000); 
+    };
+
     // Get server URL from enviroment variables.
     var server = "<?php echo $server_url ?>";
 
@@ -67,7 +72,7 @@ $(document).ready(function() {
 
             // Get token from enviroment variables.
             var token = "<?php echo $client_guid ?>";
-            var time = Date().toISOString();
+            var time = new Date().getUTCTime();
 
             // Build JSON.
             var message = { 
