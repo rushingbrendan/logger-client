@@ -85,7 +85,7 @@ $(document).ready(function() {
             //     Description: $('#description').val()            
             // }
 
-            var message = "ApplicationId="+$('#applicationId').val() + "," + "Time=2020-11-14_20:10:28:123456"+',' + "TransactionId="+$('#transactionId').val() +"," + "UserId="+$('#userId').val()+","+"Class="+$('#class').val() +',' + "Method="+$('#method').val()+',' + "Description="+$('#description').val();          
+            var message = "ApplicationId="+$('#applicationId').val() + "," + "Time="+time+',' + "TransactionId="+$('#transactionId').val() +"," + "UserId="+$('#userId').val()+","+"Class="+$('#class').val() +',' + "Method="+$('#method').val()+',' + "Description="+$('#description').val();          
             
             var toSend = { 
                 Level: level, 
