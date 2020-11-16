@@ -54,7 +54,7 @@ $(document).ready(function() {
         PARAMETERS : amount, message, level
         RETURNS : none
         */
-        function MassMessages(level, message, amount){
+        function MassMessages(level, amount){
 
             for (var y = 0; y < amount; y++){
                 var toSend = BuildMessage(level);
