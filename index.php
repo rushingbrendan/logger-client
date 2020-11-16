@@ -77,7 +77,7 @@ $(document).ready(function() {
             // Build JSON.
             var message = { 
                 ApplicationId: $('#applicationId').val(),
-                Time: time,
+                Time: "2020-11-14_20:10:28:123456",
                 TransactionId: $('#transactionId').val(),
                 UserId: $('#userId').val(),
                 Class: $('#class').val(),
