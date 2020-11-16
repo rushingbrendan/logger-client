@@ -76,13 +76,13 @@ $(document).ready(function() {
 
             // Build JSON.
             var message = { 
-                ApplicationId: $('#applicationId'),
+                ApplicationId: $('#applicationId').val(),
                 Time: time,
-                TransactionId: $('#transactionId'),
-                UserId: $('#userId'),
-                Class: $('#class'),
-                Method: $('#method'),
-                Description: $('#description')            
+                TransactionId: $('#transactionId').val(),
+                UserId: $('#userId').val(),
+                Class: $('#class').val(),
+                Method: $('#method').val(),
+                Description: $('#description').val()            
             }
 
             var toSend = { 
