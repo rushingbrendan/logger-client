@@ -89,6 +89,8 @@ $(document).ready(function() {
                 Level: level, 
                 AuthGuid: token, 
                 Message: message };
+
+            console.log(JSON.parse(JSON.stringify(toSend)));
             return toSend;
         }
 
